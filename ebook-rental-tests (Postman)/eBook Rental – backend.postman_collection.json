@@ -1,0 +1,2801 @@
+{
+  "info": {
+    "_postman_id": "f8c2977d-4aff-4ead-a8e6-fe943b3ffe35",
+    "name": "eBook Rental – backend",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "_exporter_id": "57562414"
+  },
+  "item": [
+    {
+      "name": "User",
+      "item": [
+        {
+          "name": "USR-01",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test(\"Status 200\", function () {\r\n    pm.response.to.have.status(200);\r\n});\r\n\r\nconst body = pm.response.json();\r\npm.environment.set(\"userIdA\", body.id);\r\n\r\npm.test(\"isNew = true\", function () {\r\n    pm.expect(body.isNew).to.eql(true);\r\n});"
+                ]
+              }
+            }
+          ],
+          "request": {
+            "method": "POST",
+            "header": [],
+            "body": {
+              "mode": "raw",
+              "raw": "{\r\n  \"login\": \"userA\",\r\n  \"password\": \"haslo123\"\r\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "{{baseUrl}}/user/register",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "user",
+                "register"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "USR-02",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test(\"Status 200\", function () {\r\n    pm.response.to.have.status(200);\r\n});\r\n\r\nconst body = pm.response.json();\r\npm.environment.set(\"userIdB\", body.id);\r\n\r\npm.test(\"isNew = true\", function () {\r\n    pm.expect(body.new).to.eql(true);\r\n});"
+                ]
+              }
+            }
+          ],
+          "request": {
+            "method": "POST",
+            "header": [],
+            "body": {
+              "mode": "raw",
+              "raw": "{\r\n  \"login\": \"userB\",\r\n  \"password\": \"haslo456\"\r\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "{{baseUrl}}/user/register",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "user",
+                "register"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "USR-03",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test(\"Status 200\", function () {\r\n    pm.response.to.have.status(200);\r\n});\r\n\r\nconst body = pm.response.json();\r\n\r\npm.test(\"Ten sam id co userIdA\", function () {\r\n    pm.expect(body.id).to.eql(Number(pm.environment.get(\"userIdA\")));\r\n});\r\n\r\npm.test(\"isNew = false\", function () {\r\n    pm.expect(body.new).to.eql(false);\r\n});"
+                ]
+              }
+            }
+          ],
+          "request": {
+            "method": "POST",
+            "header": [],
+            "body": {
+              "mode": "raw",
+              "raw": "{\r\n  \"login\": \"userA\",\r\n  \"password\": \"nowe_haslo\"\r\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "{{baseUrl}}/user/register",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "user",
+                "register"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "USR-04",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test(\"Status 200\", function () {\r\n    pm.response.to.have.status(200);\r\n});\r\n\r\npm.test(\"Odpowiedź zawiera pole id i new\", function () {\r\n    const body = pm.response.json();\r\n    pm.expect(body).to.have.property(\"id\");\r\n    pm.expect(body).to.have.property(\"new\");\r\n});"
+                ]
+              }
+            }
+          ],
+          "request": {
+            "method": "POST",
+            "header": [],
+            "body": {
+              "mode": "raw",
+              "raw": "{}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "{{baseUrl}}/user/register",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "user",
+                "register"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "USR-05",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test(\"Status 400\", function () {\r\n    pm.response.to.have.status(400);\r\n});"
+                ]
+              }
+            }
+          ],
+          "request": {
+            "method": "POST",
+            "header": [],
+            "url": {
+              "raw": "{{baseUrl}}/user/register",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "user",
+                "register"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "USR-06",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test(\"Status 200\", function () {\r\n    pm.response.to.have.status(200);\r\n});\r\n\r\npm.test(\"Zwrócone id = userIdA\", function () {\r\n    const returnedId = pm.response.text();\r\n    pm.expect(Number(returnedId)).to.eql(Number(pm.environment.get(\"userIdA\")));\r\n});"
+                ]
+              }
+            }
+          ],
+          "request": {
+            "method": "POST",
+            "header": [],
+            "body": {
+              "mode": "raw",
+              "raw": "{\r\n  \"login\": \"userA\",\r\n  \"password\": \"nowe_haslo\"\r\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "{{baseUrl}}/user/login",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "user",
+                "login"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "USR-07",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test(\"Status 200\", function () {\r\n    pm.response.to.have.status(200);\r\n});\r\n\r\npm.test(\"Zwrócony id zgodny z id z rejestracji (USR-01)\", function () {\r\n    const returnedId = pm.response.text();\r\n    pm.expect(Number(returnedId)).to.eql(Number(pm.environment.get(\"userIdA\")));\r\n});"
+                ]
+              }
+            }
+          ],
+          "request": {
+            "method": "POST",
+            "header": [],
+            "body": {
+              "mode": "raw",
+              "raw": "{\r\n    \"login\": \"userA\",\r\n    \"password\": \"nowe_haslo\"\r\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "{{baseUrl}}/user/login",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "user",
+                "login"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "USR-08",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test(\"Status 200\", function () {\r\n    pm.response.to.have.status(200);\r\n});\r\n\r\npm.test(\"Odpowiedź = -1 (NOT_LOGGED_IN)\", function () {\r\n    pm.expect(pm.response.text()).to.eql(\"-1\");\r\n});"
+                ]
+              }
+            }
+          ],
+          "request": {
+            "method": "POST",
+            "header": [],
+            "body": {
+              "mode": "raw",
+              "raw": "{\r\n  \"login\": \"userA\",\r\n  \"password\": \"zle_haslo\"\r\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "{{baseUrl}}/user/login",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "user",
+                "login"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "USR-09",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test(\"Status 200\", function () {\r\n    pm.response.to.have.status(200);\r\n});\r\n\r\npm.test(\"Odpowiedź = -1 (NOT_LOGGED_IN)\", function () {\r\n    pm.expect(pm.response.text()).to.eql(\"-1\");\r\n});"
+                ]
+              }
+            }
+          ],
+          "request": {
+            "method": "POST",
+            "header": [],
+            "body": {
+              "mode": "raw",
+              "raw": "{\r\n  \"login\": \"user_ktory_nie_istnieje\",\r\n  \"password\": \"cokolwiek\"\r\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "{{baseUrl}}/user/login",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "user",
+                "login"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "USR-10",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test(\"Status 400\", function () {\r\n    pm.response.to.have.status(400);\r\n});"
+                ]
+              }
+            }
+          ],
+          "request": {
+            "method": "POST",
+            "header": [],
+            "url": {
+              "raw": "{{baseUrl}}/user/login",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "user",
+                "login"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "USR-11",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test(\"Status 405\", function () {\r\n    pm.response.to.have.status(405);\r\n});"
+                ]
+              }
+            }
+          ],
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{baseUrl}}/user/login",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "user",
+                "login"
+              ]
+            }
+          },
+          "response": []
+        }
+      ]
+    },
+    {
+      "name": "Titles",
+      "item": [
+        {
+          "name": "TIT-01",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test(\"Status 200\", function () {\r\n    pm.response.to.have.status(200);\r\n});\r\n\r\npm.test(\"Pusta lista\", function () {\r\n    pm.expect(pm.response.json()).to.eql([]);\r\n});"
+                ]
+              }
+            }
+          ],
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{baseUrl}}/titles/?userId={{userIdA}}",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "titles",
+                ""
+              ],
+              "query": [
+                {
+                  "key": "userId",
+                  "value": "{{userIdA}}"
+                }
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "TIT-02",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test(\"Status 200\", function () {\r\n    pm.response.to.have.status(200);\r\n});\r\n\r\npm.test(\"Lista zawiera dodany tytuł\", function () {\r\n    const body = pm.response.json();\r\n    const found = body.find(t => String(t.id) === pm.environment.get(\"titleId\"));\r\n    pm.expect(found).to.not.be.undefined;\r\n    pm.expect(found.author).to.eql(\"Andrzej Sapkowski\");\r\n    pm.expect(found.title).to.eql(\"Wiedźmin\");\r\n    pm.expect(found.year).to.eql(1990);\r\n});"
+                ]
+              }
+            }
+          ],
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{baseUrl}}/titles/?userId={{userIdA}}",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "titles",
+                ""
+              ],
+              "query": [
+                {
+                  "key": "userId",
+                  "value": "{{userIdA}}"
+                }
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "TIT-03",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test(\"Status 400\", function () {\r\n    pm.response.to.have.status(400);\r\n});"
+                ]
+              }
+            }
+          ],
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{baseUrl}}/titles/",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "titles",
+                ""
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "TIT-04",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test(\"Status 400\", function () {\r\n    pm.response.to.have.status(400);\r\n});"
+                ]
+              }
+            }
+          ],
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{baseUrl}}/titles/?userId=abc",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "titles",
+                ""
+              ],
+              "query": [
+                {
+                  "key": "userId",
+                  "value": "abc"
+                }
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "TIT-05",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test(\"Status 200\", function () {\r\n    pm.response.to.have.status(200);\r\n});\r\n\r\npm.test(\"Pusta lista\", function () {\r\n    pm.expect(pm.response.json()).to.eql([]);\r\n});"
+                ]
+              }
+            }
+          ],
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{baseUrl}}/titles/?userId=999999",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "titles",
+                ""
+              ],
+              "query": [
+                {
+                  "key": "userId",
+                  "value": "999999"
+                }
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "TIT-06",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test(\"Status 200\", function () {\r\n    pm.response.to.have.status(200);\r\n});\r\n\r\npm.test(\"Brak tytułów użytkownika A\", function () {\r\n    const body = pm.response.json();\r\n    const ids = body.map(t => String(t.id));\r\n    pm.expect(ids).to.not.include(pm.environment.get(\"titleId\"));\r\n    pm.expect(ids).to.not.include(pm.environment.get(\"titleIdToDelete\"));\r\n});"
+                ]
+              }
+            }
+          ],
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{baseUrl}}/titles/?userId={{userIdB}}",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "titles",
+                ""
+              ],
+              "query": [
+                {
+                  "key": "userId",
+                  "value": "{{userIdB}}"
+                }
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "TIT-07",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test(\"Status 200\", function () {\r\n    pm.response.to.have.status(200);\r\n});\r\n\r\npm.environment.set(\"titleId\", pm.response.text());\r\n\r\npm.test(\"Zwrócone id jest liczbą\", function () {\r\n    pm.expect(Number(pm.response.text())).to.be.a(\"number\");\r\n});"
+                ]
+              }
+            }
+          ],
+          "request": {
+            "method": "POST",
+            "header": [],
+            "body": {
+              "mode": "raw",
+              "raw": "{\r\n  \"userId\": {{userIdA}},\r\n  \"author\": \"Andrzej Sapkowski\",\r\n  \"title\": \"Wiedźmin\",\r\n  \"year\": 1990\r\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "{{baseUrl}}/titles/",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "titles",
+                ""
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "TIT-08",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test(\"Status 200\", function () {\r\n    pm.response.to.have.status(200);\r\n});\r\n\r\npm.environment.set(\"titleIdToDelete\", pm.response.text());\r\n\r\npm.test(\"id różne od titleId\", function () {\r\n    pm.expect(pm.response.text()).to.not.eql(pm.environment.get(\"titleId\"));\r\n});"
+                ]
+              }
+            }
+          ],
+          "request": {
+            "method": "POST",
+            "header": [],
+            "body": {
+              "mode": "raw",
+              "raw": "{\r\n  \"userId\": {{userIdA}},\r\n  \"author\": \"Stanisław Lem\",\r\n  \"title\": \"Solaris\",\r\n  \"year\": 1961\r\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "{{baseUrl}}/titles/",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "titles",
+                ""
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "TIT-09",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test(\"Status 500\", function () {\r\n    pm.response.to.have.status(500);\r\n});"
+                ]
+              }
+            }
+          ],
+          "request": {
+            "method": "POST",
+            "header": [],
+            "body": {
+              "mode": "raw",
+              "raw": "{\r\n  \"userId\": {{userIdA}},\r\n  \"title\": \"Bez autora\",\r\n  \"year\": 2000\r\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "{{baseUrl}}/titles/",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "titles",
+                ""
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "TIT-10",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test(\"Status 400\", function () {\r\n    pm.response.to.have.status(400);\r\n});"
+                ]
+              }
+            }
+          ],
+          "request": {
+            "method": "POST",
+            "header": [],
+            "body": {
+              "mode": "raw",
+              "raw": "{\r\n  \"userId\": {{userIdA}},\r\n  \"author\": \"Test\",\r\n  \"title\": \"Zła data\",\r\n  \"year\": \"abc\"\r\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "{{baseUrl}}/titles/",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "titles",
+                ""
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "TIT-11",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test(\"Status 500\", function () {\r\n    pm.response.to.have.status(500);\r\n});"
+                ]
+              }
+            }
+          ],
+          "request": {
+            "method": "POST",
+            "header": [],
+            "body": {
+              "mode": "raw",
+              "raw": "{\r\n  \"userId\": 999999,\r\n  \"author\": \"Test\",\r\n  \"title\": \"Nieistniejący user\",\r\n  \"year\": 2000\r\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "{{baseUrl}}/titles/",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "titles",
+                ""
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "TIT-12",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test(\"Status 400\", function () {\r\n    pm.response.to.have.status(400);\r\n});"
+                ]
+              }
+            }
+          ],
+          "request": {
+            "method": "POST",
+            "header": [],
+            "url": {
+              "raw": "{{baseUrl}}/titles/",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "titles",
+                ""
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "TIT-13",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test(\"Status 200\", function () {\r\n    pm.response.to.have.status(200);\r\n});\r\n\r\npm.test(\"Dane zaktualizowane\", function () {\r\n    const body = pm.response.json();\r\n    pm.expect(body.title).to.eql(\"Wiedźmin. Ostatnie życzenie\");\r\n    pm.expect(body.year).to.eql(1993);\r\n});"
+                ]
+              }
+            }
+          ],
+          "request": {
+            "method": "PUT",
+            "header": [],
+            "body": {
+              "mode": "raw",
+              "raw": "{\r\n  \"userId\": {{userIdA}},\r\n  \"id\": {{titleId}},\r\n  \"author\": \"Andrzej Sapkowski\",\r\n  \"title\": \"Wiedźmin. Ostatnie życzenie\",\r\n  \"year\": 1993\r\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "{{baseUrl}}/titles/",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "titles",
+                ""
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "TIT-14",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test(\"Status 500\", function () {\r\n    pm.response.to.have.status(500);\r\n});"
+                ]
+              }
+            }
+          ],
+          "request": {
+            "method": "PUT",
+            "header": [],
+            "body": {
+              "mode": "raw",
+              "raw": "{\r\n  \"userId\": {{userIdA}},\r\n  \"id\": 999999,\r\n  \"author\": \"Andrzej Sapkowski\",\r\n  \"title\": \"Wiedźmin. Ostatnie życzenie\",\r\n  \"year\": 1993\r\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "{{baseUrl}}/titles/",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "titles",
+                ""
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "TIT-15",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test(\"Status 500\", function () {\r\n    pm.response.to.have.status(500);\r\n});"
+                ]
+              }
+            }
+          ],
+          "request": {
+            "method": "PUT",
+            "header": [],
+            "body": {
+              "mode": "raw",
+              "raw": "{\r\n  \"userId\": {{userIdB}},\r\n  \"id\": {{titleId}},\r\n  \"author\": \"Andrzej Sapkowski\",\r\n  \"title\": \"Wiedźmin. Ostatnie życzenie\",\r\n  \"year\": 1993\r\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "{{baseUrl}}/titles/",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "titles",
+                ""
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "TIT-16",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test(\"Status 400\", function () {\r\n    pm.response.to.have.status(400);\r\n});"
+                ]
+              }
+            }
+          ],
+          "request": {
+            "method": "PUT",
+            "header": [],
+            "body": {
+              "mode": "raw",
+              "raw": "{\r\n  \"userId\": {{userIdA}},\r\n  \"id\": {{titleId}},\r\n  \"author\": \"Andrzej Sapkowski\",\r\n  \"title\": \"Wiedźmin. Ostatnie życzenie\",\r\n  \"year\": \"abc\"\r\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "{{baseUrl}}/titles/",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "titles",
+                ""
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "TIT-17",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test(\"Status 400\", function () {\r\n    pm.response.to.have.status(400);\r\n});"
+                ]
+              }
+            }
+          ],
+          "request": {
+            "method": "PUT",
+            "header": [],
+            "url": {
+              "raw": "{{baseUrl}}/titles/",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "titles",
+                ""
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "TIT-18",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test(\"Status 200\", function () {\r\n    pm.response.to.have.status(200);\r\n});\r\n\r\npm.test(\"Zwrócone true\", function () {\r\n    pm.expect(pm.response.text()).to.eql(\"true\");\r\n});"
+                ]
+              }
+            }
+          ],
+          "request": {
+            "method": "DELETE",
+            "header": [],
+            "url": {
+              "raw": "{{baseUrl}}/titles/?userId={{userIdA}}&id={{titleIdToDelete}}",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "titles",
+                ""
+              ],
+              "query": [
+                {
+                  "key": "userId",
+                  "value": "{{userIdA}}"
+                },
+                {
+                  "key": "id",
+                  "value": "{{titleIdToDelete}}"
+                }
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "TIT-19",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test(\"Status 200\", function () {\r\n    pm.response.to.have.status(200);\r\n});\r\n\r\npm.test(\"Zwrócone false\", function () {\r\n    pm.expect(pm.response.text()).to.eql(\"false\");\r\n});"
+                ]
+              }
+            }
+          ],
+          "request": {
+            "method": "DELETE",
+            "header": [],
+            "url": {
+              "raw": "{{baseUrl}}/titles/?userId={{userIdA}}&id=999999",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "titles",
+                ""
+              ],
+              "query": [
+                {
+                  "key": "userId",
+                  "value": "{{userIdA}}"
+                },
+                {
+                  "key": "id",
+                  "value": "999999"
+                }
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "TIT-20",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test(\"Status 200\", function () {\r\n    pm.response.to.have.status(200);\r\n});\r\n\r\npm.test(\"Zwrócone false\", function () {\r\n    pm.expect(pm.response.text()).to.eql(\"false\");\r\n});"
+                ]
+              }
+            }
+          ],
+          "request": {
+            "method": "DELETE",
+            "header": [],
+            "url": {
+              "raw": "{{baseUrl}}/titles/?userId={{userIdB}}&id={{titleId}}",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "titles",
+                ""
+              ],
+              "query": [
+                {
+                  "key": "userId",
+                  "value": "{{userIdB}}"
+                },
+                {
+                  "key": "id",
+                  "value": "{{titleId}}"
+                }
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "TIT-21",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test(\"Status 400\", function () {\r\n    pm.response.to.have.status(400);\r\n});"
+                ]
+              }
+            }
+          ],
+          "request": {
+            "method": "DELETE",
+            "header": [],
+            "url": {
+              "raw": "{{baseUrl}}/titles/",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "titles",
+                ""
+              ]
+            }
+          },
+          "response": []
+        }
+      ]
+    },
+    {
+      "name": "Items",
+      "item": [
+        {
+          "name": "ITM-01",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test(\"Status 200\", function () {\r\n    pm.response.to.have.status(200);\r\n});\r\n\r\npm.test(\"Pusta lista\", function () {\r\n    pm.expect(pm.response.json()).to.eql([]);\r\n});"
+                ]
+              }
+            }
+          ],
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{baseUrl}}/items/?userId={{userIdA}}&titleId={{titleId}}",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "items",
+                ""
+              ],
+              "query": [
+                {
+                  "key": "userId",
+                  "value": "{{userIdA}}"
+                },
+                {
+                  "key": "titleId",
+                  "value": "{{titleId}}"
+                }
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "ITM-02",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test(\"Status 200\", function () {\r\n    pm.response.to.have.status(200);\r\n});\r\n\r\npm.test(\"Lista zawiera dodany egzemplarz ze statusem AVAILABLE\", function () {\r\n    const body = pm.response.json();\r\n    const found = body.find(i => String(i.id) === pm.environment.get(\"itemId\"));\r\n    pm.expect(found).to.not.be.undefined;\r\n    pm.expect(found.status).to.eql(\"AVAILABLE\");\r\n});"
+                ]
+              }
+            }
+          ],
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{baseUrl}}/items/?userId={{userIdA}}&titleId={{titleId}}",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "items",
+                ""
+              ],
+              "query": [
+                {
+                  "key": "userId",
+                  "value": "{{userIdA}}"
+                },
+                {
+                  "key": "titleId",
+                  "value": "{{titleId}}"
+                }
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "ITM-03",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test(\"Status 400\", function () {\r\n    pm.response.to.have.status(400);\r\n});"
+                ]
+              }
+            }
+          ],
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{baseUrl}}/items/?titleId={{titleId}}",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "items",
+                ""
+              ],
+              "query": [
+                {
+                  "key": "titleId",
+                  "value": "{{titleId}}"
+                }
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "ITM-04",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test(\"Status 400\", function () {\r\n    pm.response.to.have.status(400);\r\n});"
+                ]
+              }
+            }
+          ],
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{baseUrl}}/items/?userId={{userIdA}}",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "items",
+                ""
+              ],
+              "query": [
+                {
+                  "key": "userId",
+                  "value": "{{userIdA}}"
+                }
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "ITM-05",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test(\"Status 200\", function () {\r\n    pm.response.to.have.status(200);\r\n});\r\n\r\npm.test(\"Pusta lista\", function () {\r\n    pm.expect(pm.response.json()).to.eql([]);\r\n});"
+                ]
+              }
+            }
+          ],
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{baseUrl}}/items/?userId={{userIdA}}&titleId=999999",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "items",
+                ""
+              ],
+              "query": [
+                {
+                  "key": "userId",
+                  "value": "{{userIdA}}"
+                },
+                {
+                  "key": "titleId",
+                  "value": "999999"
+                }
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "ITM-06",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test(\"Status 200\", function () {\r\n    pm.response.to.have.status(200);\r\n});\r\n\r\npm.test(\"Pusta lista\", function () {\r\n    pm.expect(pm.response.json()).to.eql([]);\r\n});"
+                ]
+              }
+            }
+          ],
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{baseUrl}}/items/?userId={{userIdB}}&titleId={{titleId}}",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "items",
+                ""
+              ],
+              "query": [
+                {
+                  "key": "userId",
+                  "value": "{{userIdB}}"
+                },
+                {
+                  "key": "titleId",
+                  "value": "{{titleId}}"
+                }
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "ITM-07",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test(\"Status 200\", function () {\r\n    pm.response.to.have.status(200);\r\n});\r\n\r\npm.environment.set(\"itemId\", pm.response.text());\r\n\r\npm.test(\"Zwrócone id jest liczbą\", function () {\r\n    pm.expect(Number(pm.response.text())).to.be.a(\"number\");\r\n});"
+                ]
+              }
+            }
+          ],
+          "request": {
+            "method": "POST",
+            "header": [],
+            "body": {
+              "mode": "raw",
+              "raw": "{\r\n  \"userId\": {{userIdA}},\r\n  \"titleId\": {{titleId}},\r\n  \"purchaseDate\": \"2024-01-15\"\r\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "{{baseUrl}}/items/",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "items",
+                ""
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "ITM-07 (drugi egzemplarz)",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test(\"Status 200\", function () {\r\n    pm.response.to.have.status(200);\r\n});\r\n\r\npm.environment.set(\"itemIdToDelete\", pm.response.text());"
+                ]
+              }
+            }
+          ],
+          "request": {
+            "method": "POST",
+            "header": [],
+            "body": {
+              "mode": "raw",
+              "raw": "{\r\n  \"userId\": {{userIdA}},\r\n  \"titleId\": {{titleId}},\r\n  \"purchaseDate\": \"2025-03-22\"\r\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "{{baseUrl}}/items/",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "items",
+                ""
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "ITM-08",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test(\"Status 500\", function () {\r\n    pm.response.to.have.status(500);\r\n});"
+                ]
+              }
+            }
+          ],
+          "request": {
+            "method": "POST",
+            "header": [],
+            "body": {
+              "mode": "raw",
+              "raw": "{\r\n  \"userId\": {{userIdA}},\r\n  \"titleId\": 999999,\r\n  \"purchaseDate\": \"2024-01-15\"\r\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "{{baseUrl}}/items/",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "items",
+                ""
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "ITM-09",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test(\"Status 500\", function () {\r\n    pm.response.to.have.status(500);\r\n});"
+                ]
+              }
+            }
+          ],
+          "request": {
+            "method": "POST",
+            "header": [],
+            "body": {
+              "mode": "raw",
+              "raw": "{\r\n  \"userId\": {{userIdB}},\r\n  \"titleId\": {{titleId}},\r\n  \"purchaseDate\": \"2024-01-15\"\r\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "{{baseUrl}}/items/",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "items",
+                ""
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "ITM-10",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test(\"Status 400\", function () {\r\n    pm.response.to.have.status(400);\r\n});"
+                ]
+              }
+            }
+          ],
+          "request": {
+            "method": "POST",
+            "header": [],
+            "body": {
+              "mode": "raw",
+              "raw": "{\r\n  \"userId\": {{userIdA}},\r\n  \"titleId\": {{titleId}},\r\n  \"purchaseDate\": \"abc\"\r\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "{{baseUrl}}/items/",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "items",
+                ""
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "ITM-11",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test(\"Status 400\", function () {\r\n    pm.response.to.have.status(400);\r\n});"
+                ]
+              }
+            }
+          ],
+          "request": {
+            "method": "POST",
+            "header": [],
+            "url": {
+              "raw": "{{baseUrl}}/items/",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "items",
+                ""
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "ITM-12",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test(\"Status 200\", function () {\r\n    pm.response.to.have.status(200);\r\n});\r\n\r\npm.test(\"Data zaktualizowana\", function () {\r\n    pm.expect(pm.response.json().purchaseDate).to.eql(\"2024-06-01\");\r\n});"
+                ]
+              }
+            }
+          ],
+          "request": {
+            "method": "PUT",
+            "header": [],
+            "body": {
+              "mode": "raw",
+              "raw": "{\r\n  \"id\": {{itemId}},\r\n  \"userId\": {{userIdA}},\r\n  \"purchaseDate\": \"2024-06-01\"\r\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "{{baseUrl}}/items/",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "items",
+                ""
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "ITM-13",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test(\"Status 500\", function () {\r\n    pm.response.to.have.status(500);\r\n});"
+                ]
+              }
+            }
+          ],
+          "request": {
+            "method": "PUT",
+            "header": [],
+            "body": {
+              "mode": "raw",
+              "raw": "{\r\n  \"id\": 999999,\r\n  \"userId\": {{userIdA}},\r\n  \"purchaseDate\": \"2024-06-01\"\r\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "{{baseUrl}}/items/",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "items",
+                ""
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "ITM-14",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test(\"Status 500\", function () {\r\n    pm.response.to.have.status(500);\r\n});"
+                ]
+              }
+            }
+          ],
+          "request": {
+            "method": "PUT",
+            "header": [],
+            "body": {
+              "mode": "raw",
+              "raw": "{\r\n  \"id\": {{itemId}},\r\n  \"userId\": {{userIdB}},\r\n  \"purchaseDate\": \"2024-06-01\"\r\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "{{baseUrl}}/items/",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "items",
+                ""
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "ITM-15",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test(\"Status 400\", function () {\r\n    pm.response.to.have.status(400);\r\n});"
+                ]
+              }
+            }
+          ],
+          "request": {
+            "method": "PUT",
+            "header": [],
+            "body": {
+              "mode": "raw",
+              "raw": "{\r\n  \"id\": {{itemId}},\r\n  \"userId\": {{userIdA}},\r\n  \"purchaseDate\": \"abc\"\r\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "{{baseUrl}}/items/",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "items",
+                ""
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "ITM-16",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test(\"Status 200\", function () {\r\n    pm.response.to.have.status(200);\r\n});\r\n\r\npm.test(\"Zwrócone true\", function () {\r\n    pm.expect(pm.response.text()).to.eql(\"true\");\r\n});"
+                ]
+              }
+            }
+          ],
+          "request": {
+            "method": "DELETE",
+            "header": [],
+            "url": {
+              "raw": "{{baseUrl}}/items/?userId={{userIdA}}&id={{itemIdToDelete}}",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "items",
+                ""
+              ],
+              "query": [
+                {
+                  "key": "userId",
+                  "value": "{{userIdA}}"
+                },
+                {
+                  "key": "id",
+                  "value": "{{itemIdToDelete}}"
+                }
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "ITM-17",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test(\"Status 500\", function () {\r\n    pm.response.to.have.status(500);\r\n});"
+                ]
+              }
+            }
+          ],
+          "request": {
+            "method": "DELETE",
+            "header": [],
+            "url": {
+              "raw": "{{baseUrl}}/items/?userId={{userIdA}}&id=999999",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "items",
+                ""
+              ],
+              "query": [
+                {
+                  "key": "userId",
+                  "value": "{{userIdA}}"
+                },
+                {
+                  "key": "id",
+                  "value": "999999"
+                }
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "ITM-18",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test(\"Status 500\", function () {\r\n    pm.response.to.have.status(500);\r\n});"
+                ]
+              }
+            }
+          ],
+          "request": {
+            "method": "DELETE",
+            "header": [],
+            "url": {
+              "raw": "{{baseUrl}}/items/?userId={{userIdB}}&id={{itemId}}",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "items",
+                ""
+              ],
+              "query": [
+                {
+                  "key": "userId",
+                  "value": "{{userIdB}}"
+                },
+                {
+                  "key": "id",
+                  "value": "{{itemId}}"
+                }
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "ITM-19",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test(\"Status 400\", function () {\r\n    pm.response.to.have.status(400);\r\n});"
+                ]
+              }
+            }
+          ],
+          "request": {
+            "method": "DELETE",
+            "header": [],
+            "url": {
+              "raw": "{{baseUrl}}/items/",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "items",
+                ""
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "ITM-20",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test(\"Status 500 (usunięcie itemu z aktywnym wypożyczeniem - naruszenie integralności danych)\", () => {\r\n    pm.response.to.have.status(500);\r\n});"
+                ]
+              }
+            }
+          ],
+          "request": {
+            "method": "DELETE",
+            "header": [],
+            "url": {
+              "raw": "{{baseUrl}}/items/?userId={{userIdA}}&id={{itemId}}",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "items",
+                ""
+              ],
+              "query": [
+                {
+                  "key": "userId",
+                  "value": "{{userIdA}}"
+                },
+                {
+                  "key": "id",
+                  "value": "{{itemId}}"
+                }
+              ]
+            }
+          },
+          "response": []
+        }
+      ]
+    },
+    {
+      "name": "Rents",
+      "item": [
+        {
+          "name": "RNT-01",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test(\"Status 200\", () => pm.response.to.have.status(200));\r\npm.test(\"Pusta tablica\", () => {\r\n    const body = pm.response.json();\r\n    pm.expect(body).to.be.an('array').that.is.empty;\r\n});"
+                ]
+              }
+            }
+          ],
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{baseUrl}}/rents/?userId={{userIdA}}&itemId={{itemId}}",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "rents",
+                ""
+              ],
+              "query": [
+                {
+                  "key": "userId",
+                  "value": "{{userIdA}}"
+                },
+                {
+                  "key": "itemId",
+                  "value": "{{itemId}}"
+                }
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "RNT-02",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test(\"Status 200\", () => pm.response.to.have.status(200));\r\npm.test(\"Lista zawiera utworzony rent\", () => {\r\n    const body = pm.response.json();\r\n    pm.expect(body).to.be.an('array').with.lengthOf(1);\r\n    pm.expect(body[0].id).to.eql(pm.environment.get('rentId'));\r\n    pm.expect(body[0]).to.have.property('rentDate');\r\n    pm.expect(body[0]).to.have.property('expirationDate');\r\n});"
+                ]
+              }
+            }
+          ],
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{baseUrl}}/rents/?userId={{userIdA}}&itemId={{itemId}}",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "rents",
+                ""
+              ],
+              "query": [
+                {
+                  "key": "userId",
+                  "value": "{{userIdA}}"
+                },
+                {
+                  "key": "itemId",
+                  "value": "{{itemId}}"
+                }
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "RNT-03",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test(\"Status 200\", () => pm.response.to.have.status(200));\r\npm.test(\"Pusta tablica dla nieistniejącego usera\", () => {\r\n    const body = pm.response.json();\r\n    pm.expect(body).to.be.an('array').that.is.empty;\r\n});"
+                ]
+              }
+            }
+          ],
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{baseUrl}}/rents/?userId=999999&itemId={{itemId}}",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "rents",
+                ""
+              ],
+              "query": [
+                {
+                  "key": "userId",
+                  "value": "999999"
+                },
+                {
+                  "key": "itemId",
+                  "value": "{{itemId}}"
+                }
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "RNT-04",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test(\"Status 200\", () => pm.response.to.have.status(200));\r\npm.test(\"Pusta tablica dla nieistniejącego itemu\", () => {\r\n    const body = pm.response.json();\r\n    pm.expect(body).to.be.an('array').that.is.empty;\r\n});"
+                ]
+              }
+            }
+          ],
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{baseUrl}}/rents/?userId={{userIdA}}&itemId=999999",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "rents",
+                ""
+              ],
+              "query": [
+                {
+                  "key": "userId",
+                  "value": "{{userIdA}}"
+                },
+                {
+                  "key": "itemId",
+                  "value": "999999"
+                }
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "RNT-05",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test(\"Status 200\", () => pm.response.to.have.status(200));\r\npm.test(\"Rent użytkownika A niewidoczny dla usera B\", () => {\r\n    const body = pm.response.json();\r\n    pm.expect(body).to.be.an('array').that.is.empty;\r\n});"
+                ]
+              }
+            }
+          ],
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{baseUrl}}/rents/?userId={{userIdB}}&itemId={{itemId}}",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "rents",
+                ""
+              ],
+              "query": [
+                {
+                  "key": "userId",
+                  "value": "{{userIdB}}"
+                },
+                {
+                  "key": "itemId",
+                  "value": "{{itemId}}"
+                }
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "RNT-06",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test(\"Status 200\", () => pm.response.to.have.status(200));\r\npm.test(\"Zwrócono id nowego wypożyczenia\", () => {\r\n    const id = pm.response.json();\r\n    pm.expect(id).to.be.a('number');\r\n    pm.environment.set('rentId', id);\r\n});"
+                ]
+              }
+            }
+          ],
+          "request": {
+            "method": "POST",
+            "header": [],
+            "body": {
+              "mode": "raw",
+              "raw": "{\r\n    \"userId\": {{userIdA}},\r\n    \"itemId\": {{itemId}},\r\n    \"customerName\": \"Jan Kowalski\",\r\n    \"rentDate\": \"2026-09-22\"\r\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "{{baseUrl}}/rents/",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "rents",
+                ""
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "RNT-07",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test(\"Status 200\", () => pm.response.to.have.status(200));\r\npm.test(\"Status egzemplarza mimo wypożyczenia to AVAILABLE (backend nie aktualizuje statusu)\", () => {\r\n    const body = pm.response.json();\r\n    const targetId = Number(pm.environment.get('itemId'));\r\n    const item = body.find(i => i.id === targetId);\r\n    pm.expect(item, `Nie znaleziono itemu o id ${targetId} w odpowiedzi`).to.exist;\r\n    pm.expect(item.status).to.eql('AVAILABLE');\r\n});"
+                ]
+              }
+            }
+          ],
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{baseUrl}}/items/?userId={{userIdA}}&titleId={{titleId}}",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "items",
+                ""
+              ],
+              "query": [
+                {
+                  "key": "userId",
+                  "value": "{{userIdA}}"
+                },
+                {
+                  "key": "titleId",
+                  "value": "{{titleId}}"
+                }
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "RNT-08",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test(\"Status 500 (brak userId - NPE w mapperze)\", () => {\r\n    pm.response.to.have.status(500);\r\n});"
+                ]
+              }
+            }
+          ],
+          "request": {
+            "method": "POST",
+            "header": [],
+            "body": {
+              "mode": "raw",
+              "raw": "{\r\n    \"itemId\": {{itemId}},\r\n    \"customerName\": \"Test User\",\r\n    \"rentDate\": \"2026-09-22\"\r\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "{{baseUrl}}/rents/",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "rents",
+                ""
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "RNT-09",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test(\"Status 500 (brak itemId)\", () => {\r\n    pm.response.to.have.status(500);\r\n});"
+                ]
+              }
+            }
+          ],
+          "request": {
+            "method": "POST",
+            "header": [],
+            "body": {
+              "mode": "raw",
+              "raw": "{\r\n    \"userId\": {{userIdA}},\r\n    \"customerName\": \"Test User\",\r\n    \"rentDate\": \"2026-09-22\"\r\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "{{baseUrl}}/rents/",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "rents",
+                ""
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "RNT-10",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test(\"Status 500 (nieistniejący user)\", () => {\r\n    pm.response.to.have.status(500);\r\n});"
+                ]
+              }
+            }
+          ],
+          "request": {
+            "method": "POST",
+            "header": [],
+            "body": {
+              "mode": "raw",
+              "raw": "{\r\n    \"userId\": 999999,\r\n    \"itemId\": {{itemId}},\r\n    \"customerName\": \"Test User\",\r\n    \"rentDate\": \"2026-09-22\"\r\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "{{baseUrl}}/rents/",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "rents",
+                ""
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "RNT-11",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test(\"Status 200 (brak walidacji daty)\", () => pm.response.to.have.status(200));\r\npm.test(\"Zwrócono id\", () => {\r\n    const id = pm.response.json();\r\n    pm.expect(id).to.be.a('number');\r\n});"
+                ]
+              }
+            }
+          ],
+          "request": {
+            "method": "POST",
+            "header": [],
+            "body": {
+              "mode": "raw",
+              "raw": "{\r\n    \"userId\": {{userIdA}},\r\n    \"itemId\": {{itemId}},\r\n    \"customerName\": \"Test User\",\r\n    \"rentDate\": \"2020-01-01\"\r\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "{{baseUrl}}/rents/",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "rents",
+                ""
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "RNT-12",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test(\"Status 500 (brak rentDate - NPE przy plusDays)\", () => {\r\n    pm.response.to.have.status(500);\r\n});"
+                ]
+              }
+            }
+          ],
+          "request": {
+            "method": "POST",
+            "header": [],
+            "body": {
+              "mode": "raw",
+              "raw": "{\r\n    \"userId\": {{userIdA}},\r\n    \"itemId\": {{itemId}},\r\n    \"customerName\": \"Test User\"\r\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "{{baseUrl}}/rents/",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "rents",
+                ""
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "RNT-13",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test(\"Status 200\", () => pm.response.to.have.status(200));\r\npm.test(\"Dane zaktualizowane poprawnie\", () => {\r\n    const body = pm.response.json();\r\n    pm.expect(body.id).to.eql(pm.environment.get('rentId'));\r\n    pm.expect(body.customerName).to.eql('Jan Kowalski Zaktualizowany');\r\n    pm.expect(body.expirationDate).to.eql('2026-10-06');\r\n});"
+                ]
+              }
+            }
+          ],
+          "request": {
+            "method": "PUT",
+            "header": [],
+            "body": {
+              "mode": "raw",
+              "raw": "{\r\n    \"id\": {{rentId}},\r\n    \"userId\": {{userIdA}},\r\n    \"customerName\": \"Jan Kowalski Zaktualizowany\",\r\n    \"rentDate\": \"2026-09-22\",\r\n    \"expirationDate\": \"2026-10-06\"\r\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "{{baseUrl}}/rents/",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "rents",
+                ""
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "RNT-14",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test(\"Status 200\", () => pm.response.to.have.status(200));\r\npm.test(\"Zaktualizowane dane widoczne po odczycie\", () => {\r\n    const body = pm.response.json();\r\n    const rent = body.find(r => r.id === pm.environment.get('rentId'));\r\n    pm.expect(rent).to.exist;\r\n    pm.expect(rent.customerName).to.eql('Jan Kowalski Zaktualizowany');\r\n    pm.expect(rent.expirationDate).to.eql('2026-10-06');\r\n});"
+                ]
+              }
+            }
+          ],
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{baseUrl}}/rents/?userId={{userIdA}}&itemId={{itemId}}",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "rents",
+                ""
+              ],
+              "query": [
+                {
+                  "key": "userId",
+                  "value": "{{userIdA}}"
+                },
+                {
+                  "key": "itemId",
+                  "value": "{{itemId}}"
+                }
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "RNT-15",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test(\"Status 500 (nieistniejący rent)\", () => {\r\n    pm.response.to.have.status(500);\r\n});"
+                ]
+              }
+            }
+          ],
+          "request": {
+            "method": "PUT",
+            "header": [],
+            "body": {
+              "mode": "raw",
+              "raw": "{\r\n    \"id\": 999999,\r\n    \"userId\": {{userIdA}},\r\n    \"customerName\": \"Ghost\",\r\n    \"rentDate\": \"2026-09-22\",\r\n    \"expirationDate\": \"2026-09-29\"\r\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "{{baseUrl}}/rents/",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "rents",
+                ""
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "RNT-16",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test(\"Status 500 (cudzy rent, izolacja danych)\", () => {\r\n    pm.response.to.have.status(500);\r\n});"
+                ]
+              }
+            }
+          ],
+          "request": {
+            "method": "PUT",
+            "header": [],
+            "body": {
+              "mode": "raw",
+              "raw": "{\r\n    \"id\": {{rentId}},\r\n    \"userId\": {{userIdB}},\r\n    \"customerName\": \"Intruz\",\r\n    \"rentDate\": \"2026-09-22\",\r\n    \"expirationDate\": \"2026-09-29\"\r\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "{{baseUrl}}/rents/",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "rents",
+                ""
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "RNT-17",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test(\"Status 200\", () => pm.response.to.have.status(200));\r\npm.test(\"Zwrócono id\", () => {\r\n    const id = pm.response.json();\r\n    pm.expect(id).to.be.a('number');\r\n    pm.environment.set('rentIdToDelete', id);\r\n});"
+                ]
+              }
+            }
+          ],
+          "request": {
+            "method": "POST",
+            "header": [],
+            "body": {
+              "mode": "raw",
+              "raw": "{\r\n    \"userId\": {{userIdA}},\r\n    \"itemId\": {{itemId}},\r\n    \"customerName\": \"Do usuniecia\",\r\n    \"rentDate\": \"2026-09-22\"\r\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "{{baseUrl}}/rents/",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "rents",
+                ""
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "RNT-18",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test(\"Status 200\", () => pm.response.to.have.status(200));\r\npm.test(\"false dla nieistniejącego rentu (cichy fail)\", () => {\r\n    pm.expect(pm.response.text()).to.eql('false');\r\n});"
+                ]
+              }
+            }
+          ],
+          "request": {
+            "method": "DELETE",
+            "header": [],
+            "url": {
+              "raw": "{{baseUrl}}/rents/?userId={{userIdA}}&id=999999",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "rents",
+                ""
+              ],
+              "query": [
+                {
+                  "key": "userId",
+                  "value": "{{userIdA}}"
+                },
+                {
+                  "key": "id",
+                  "value": "999999"
+                }
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "RNT-19",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test(\"Status 500 (nieistniejący user)\", () => {\r\n    pm.response.to.have.status(500);\r\n});"
+                ]
+              }
+            }
+          ],
+          "request": {
+            "method": "DELETE",
+            "header": [],
+            "url": {
+              "raw": "{{baseUrl}}/rents/?userId=999999&id={{rentIdToDelete}}",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "rents",
+                ""
+              ],
+              "query": [
+                {
+                  "key": "userId",
+                  "value": "999999"
+                },
+                {
+                  "key": "id",
+                  "value": "{{rentIdToDelete}}"
+                }
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "RNT-20",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test(\"Status 200\", () => pm.response.to.have.status(200));\r\npm.test(\"false - rent usera A niedostępny dla usera B\", () => {\r\n    pm.expect(pm.response.text()).to.eql('false');\r\n});"
+                ]
+              }
+            }
+          ],
+          "request": {
+            "method": "DELETE",
+            "header": [],
+            "url": {
+              "raw": "{{baseUrl}}/rents/?userId={{userIdB}}&id={{rentIdToDelete}}",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "rents",
+                ""
+              ],
+              "query": [
+                {
+                  "key": "userId",
+                  "value": "{{userIdB}}"
+                },
+                {
+                  "key": "id",
+                  "value": "{{rentIdToDelete}}"
+                }
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "RNT-21",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test(\"Status 200\", () => pm.response.to.have.status(200));\r\npm.test(\"true - rent usunięty\", () => {\r\n    pm.expect(pm.response.text()).to.eql('true');\r\n});"
+                ]
+              }
+            }
+          ],
+          "request": {
+            "method": "DELETE",
+            "header": [],
+            "url": {
+              "raw": "{{baseUrl}}/rents/?userId={{userIdA}}&id={{rentIdToDelete}}",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "rents",
+                ""
+              ],
+              "query": [
+                {
+                  "key": "userId",
+                  "value": "{{userIdA}}"
+                },
+                {
+                  "key": "id",
+                  "value": "{{rentIdToDelete}}"
+                }
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "RNT-22",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test(\"Status 200\", () => pm.response.to.have.status(200));\r\npm.test(\"Usunięty rent nie występuje na liście, główny nadal istnieje\", () => {\r\n    const body = pm.response.json();\r\n    const deleted = body.find(r => r.id === pm.environment.get('rentIdToDelete'));\r\n    pm.expect(deleted).to.not.exist;\r\n    const main = body.find(r => r.id === pm.environment.get('rentId'));\r\n    pm.expect(main).to.exist;\r\n});"
+                ]
+              }
+            }
+          ],
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{baseUrl}}/rents/?userId={{userIdA}}&itemId={{itemId}}",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "rents",
+                ""
+              ],
+              "query": [
+                {
+                  "key": "userId",
+                  "value": "{{userIdA}}"
+                },
+                {
+                  "key": "itemId",
+                  "value": "{{itemId}}"
+                }
+              ]
+            }
+          },
+          "response": []
+        }
+      ]
+    }
+  ]
+}
