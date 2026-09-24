@@ -201,6 +201,19 @@ abstract class BaseTest {
         return driver.findElement(By.xpath(input)).getAttribute("value");
     }
 
+    protected void pickDateWithNegativeYear(String inputName) {
+        String negativeYear = OPEN_CALENDAR + "//span[contains(@class, \"cell year\") and starts-with(text(), \"-\")]";
+        click("//input[@name=\"" + inputName + "\"]");
+        click(OPEN_CALENDAR + "//span[contains(@class, \"day__month_btn\")]");
+        click(OPEN_CALENDAR + "//span[contains(@class, \"month__year_btn\")]");
+        while (driver.findElements(By.xpath(negativeYear)).isEmpty()) {
+            driver.findElement(By.xpath(OPEN_CALENDAR + "//span[@class=\"prev\"]")).click();
+        }
+        click(negativeYear);
+        click(OPEN_CALENDAR + "//span[contains(@class, \"cell month\") and text()=\"January\"]");
+        click(OPEN_CALENDAR + "//span[contains(@class, \"cell day\") and text()=\"1\"]");
+    }
+
     protected String pickDayInOtherMonth(String inputName, String arrow, String day) {
         String input = "//input[@name=\"" + inputName + "\"]";
         click(input);

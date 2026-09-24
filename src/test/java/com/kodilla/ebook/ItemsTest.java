@@ -10,8 +10,6 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 
 class ItemsTest extends BaseTest {
 
-    private static final String NEGATIVE_YEAR = OPEN_CALENDAR + "//span[contains(@class, \"cell year\") and starts-with(text(), \"-\")]";
-
     private void openCopiesOfNewTitle() {
         registerAndLogIn();
         addTitle("Pan Tadeusz", "Adam Mickiewicz", "1834");
@@ -47,15 +45,7 @@ class ItemsTest extends BaseTest {
         openCopiesOfNewTitle();
 
         click(ADD_COPY_BUTTON);
-        click("//input[@name=\"purchase-date\"]");
-        click(OPEN_CALENDAR + "//span[contains(@class, \"day__month_btn\")]");
-        click(OPEN_CALENDAR + "//span[contains(@class, \"month__year_btn\")]");
-        while (driver.findElements(By.xpath(NEGATIVE_YEAR)).isEmpty()) {
-            driver.findElement(By.xpath(OPEN_CALENDAR + "//span[@class=\"prev\"]")).click();
-        }
-        click(NEGATIVE_YEAR);
-        click(OPEN_CALENDAR + "//span[contains(@class, \"cell month\") and text()=\"January\"]");
-        click(OPEN_CALENDAR + "//span[contains(@class, \"cell day\") and text()=\"1\"]");
+        pickDateWithNegativeYear("purchase-date");
         click(SUBMIT_BUTTON);
 
         assertEquals("Request failed with status code 400", getText(ERROR_MESSAGE));

@@ -173,4 +173,17 @@ class RentsTest extends BaseTest {
 
         assertEquals(2, count(RENT_ITEM));
     }
+
+    @Test
+    @DisplayName("FE-RNT-13")
+    void shouldShowServerErrorForRentDateWithNegativeYear() {
+        openRentsOfNewCopy();
+
+        click(ADD_RENT_BUTTON);
+        type(CUSTOMER_NAME_INPUT, "Jan Kowalski");
+        pickDateWithNegativeYear("rent-date");
+        click(SUBMIT_BUTTON);
+
+        assertEquals("Request failed with status code 400", getText(ERROR_MESSAGE));
+    }
 }

@@ -69,8 +69,7 @@ class RegisterTest extends BaseTest {
         register(login, password, password);
         String message = getText("//div[contains(@class, \"alert\")]/p");
 
-        assertTrue(message.equals("You have been successfully registered!")
-                || message.equals("This user already exist!"));
+        assertEquals("This user already exist!", message);
 
         logIn(login, password);
 
