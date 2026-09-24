@@ -28,6 +28,7 @@ abstract class BaseTest {
     protected static final String SUCCESS_MESSAGE = "//div[contains(@class, \"alert--success\")]/p";
     protected static final String INFO_MESSAGE = "//div[contains(@class, \"alert--info\")]/p";
 
+    protected static final String LOADER = "//div[contains(@class, \"lds-ripple\")]";
     protected static final String MODAL_WINDOW = "//div[contains(@class, \"full-screen--fog\")]";
     protected static final String CLOSE_WINDOW_BUTTON = "//a[contains(@class, \"fog__icon-close\")]";
     protected static final String SUBMIT_BUTTON = "//button[@name=\"submit-button\"]";
@@ -70,8 +71,6 @@ abstract class BaseTest {
         System.setProperty("webdriver.chrome.driver", "C:\\selenium-drivers\\Chrome\\chromedriver.exe");
         driver = new ChromeDriver();
         wait = new WebDriverWait(driver, 60);
-        wait.ignoring(ElementClickInterceptedException.class);
-        wait.ignoring(StaleElementReferenceException.class);
     }
 
     @AfterEach
@@ -96,11 +95,24 @@ abstract class BaseTest {
     }
 
     protected void click(String xpath) {
-        wait.until(ExpectedConditions.elementToBeClickable(By.xpath(xpath)));
-        wait.until(webDriver -> {
-            webDriver.findElement(By.xpath(xpath)).click();
-            return true;
-        });
+        wait.until(ExpectedConditions.invisibilityOfElementLocated(By.xpath(LOADER)));
+        for (int attempt = 1; attempt <= 10; attempt++) {
+            try {
+                wait.until(ExpectedConditions.elementToBeClickable(By.xpath(xpath))).click();
+                return;
+            } catch (ElementClickInterceptedException | StaleElementReferenceException e) {
+                pause(1000);
+            }
+        }
+        wait.until(ExpectedConditions.elementToBeClickable(By.xpath(xpath))).click();
+    }
+
+    protected void pause(int milliseconds) {
+        try {
+            Thread.sleep(milliseconds);
+        } catch (InterruptedException e) {
+            throw new RuntimeException(e);
+        }
     }
 
     protected void type(String xpath, String text) {
