@@ -6,7 +6,7 @@ import org.junit.jupiter.api.Test;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
-class RegisterTest extends BaseTest {
+class RegisterTestCase extends BaseTestCase {
 
     @Test
     @DisplayName("FE-REG-01")

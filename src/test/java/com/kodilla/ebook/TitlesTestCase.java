@@ -7,7 +7,7 @@ import org.openqa.selenium.interactions.Actions;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
-class TitlesTest extends BaseTest {
+class TitlesTestCase extends BaseTestCase {
 
     @Test
     @DisplayName("FE-TIT-01")

@@ -11,7 +11,7 @@ import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
-abstract class BaseTest {
+abstract class BaseTestCase {
 
     protected static final String BASE_URL = "https://ta-bookrental-fe.onrender.com";
     protected static final String PASSWORD = "Haslo123";

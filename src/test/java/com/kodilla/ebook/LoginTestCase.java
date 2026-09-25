@@ -7,7 +7,7 @@ import org.openqa.selenium.support.ui.ExpectedConditions;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
-class LoginTest extends BaseTest {
+class LoginTestCase extends BaseTestCase {
 
     @Test
     @DisplayName("FE-LOG-01")
